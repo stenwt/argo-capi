@@ -55,7 +55,7 @@ metadata:
 spec:
   destination:
     namespace: bitwarden-ssm
-    server: '*'
+    server: https://kubernetes.default.svc
   source:
     path: ''
     repoURL: https://charts.bitwarden.com/
