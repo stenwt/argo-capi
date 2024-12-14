@@ -59,8 +59,8 @@ spec:
   source:
     path: ''
     repoURL: https://charts.bitwarden.com/
-    targetRevision: '0.1.0'
-    chart: bitwarden/sm-operator
+    targetRevision: '0.1.0-Beta'
+    chart: sm-operator
   sources: []
   project: default
   syncPolicy:
