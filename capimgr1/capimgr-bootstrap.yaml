@@ -54,8 +54,8 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    name: 'bitwarden-ssm'
     namespace: bitwarden-ssm
+    server: '*'
   source:
     path: ''
     repoURL: https://charts.bitwarden.com/
