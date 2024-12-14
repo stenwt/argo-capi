@@ -23,7 +23,6 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    name: 'capimgr-bootstrap'
     namespace: 'argocd'
     server: https://kubernetes.default.svc
   source:
@@ -54,7 +53,6 @@ spec:
   destination:
     name: 'bitwarden-ssm'
     namespace: bitwarden-ssm
-    server: https://kubernetes.default.svc
   source:
     path: ''
     repoURL: https://charts.bitwarden.com/
