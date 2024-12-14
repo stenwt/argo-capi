@@ -1,0 +1,72 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: CAPI
+  namespace: argocd
+  # Finalizer that ensures that project is not deleted until it is not referenced by any application
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: CAPI
+  # Allow manifests to deploy from any Git repos
+  sourceRepos:
+  - '*'
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: capimgr-bootstrap
+  namespace: 'argocd'
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: 'capimgr-bootstrap'
+    namespace: 'argocd'
+    server: https://kubernetes.default.svc
+  source:
+    path: capimgr1
+    repoURL: https://github.com/stenwt/argocd-gitops
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  sources: []
+  project: CAPI
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bitwarden-ssm
+  namespace: 'argocd'
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    name: 'bitwarden-ssm'
+    namespace: bitwarden-ssm
+    server: https://kubernetes.default.svc
+  source:
+    path: ''
+    repoURL: https://charts.bitwarden.com/
+    targetRevision: ''
+    chart: bitwarden/sm-operator
+  sources: []
+  project: CAPI
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ServerSideApply=true
+      - CreateNamespace=true
+
