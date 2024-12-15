@@ -90,8 +90,6 @@ spec:
     chart: cert-manager
     helm:
       parameters:
-        - name: crds.enabled
-          value: 'true'
         - name: installCRDs
           value: 'true'
   sources: []
