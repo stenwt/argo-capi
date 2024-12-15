@@ -71,3 +71,57 @@ spec:
       - ServerSideApply=true
       - CreateNamespace=true
 
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager
+  namespace: 'argocd'
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: cert-manager
+    server: https://kubernetes.default.svc
+  source:
+    path: ''
+    repoURL: https://charts.jetstack.io
+    targetRevision: 'v1.16.2'
+    chart: cert-manager
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ServerSideApply=true
+      - CreateNamespace=true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-api-operator
+  namespace: 'argocd'
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: cluster-api-operator
+    server: https://kubernetes-sigs.github.io/cluster-api-operator
+  source:
+    path: ''
+    repoURL: 
+    targetRevision: '0.14.0'
+    chart: cluster-api-operator
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ServerSideApply=true
+      - CreateNamespace=true
+
