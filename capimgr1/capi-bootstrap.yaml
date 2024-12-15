@@ -88,6 +88,12 @@ spec:
     repoURL: https://charts.jetstack.io
     targetRevision: 'v1.16.2'
     chart: cert-manager
+    helm:
+      parameters:
+        - name: crds.enabled
+          value: 'true'
+        - name: installCRDs
+          value: 'true'
   sources: []
   project: default
   syncPolicy:
