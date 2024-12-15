@@ -115,10 +115,10 @@ metadata:
 spec:
   destination:
     namespace: cluster-api-operator
-    server: https://kubernetes-sigs.github.io/cluster-api-operator
+    server: https://kubernetes.default.svc
   source:
     path: ''
-    repoURL: 
+    repoURL: https://kubernetes-sigs.github.io/cluster-api-operator 
     targetRevision: '0.14.0'
     chart: cluster-api-operator
   sources: []
