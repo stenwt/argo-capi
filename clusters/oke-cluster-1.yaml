@@ -1,0 +1,41 @@
+---
+apiVersion: operator.cluster.x-k8s.io/v1alpha2
+kind: InfrastructureProvider
+metadata:
+ name: proxmox
+ namespace: capmox-system
+spec:
+ version: v0.6.2
+ configSecret:
+   name: proxmox-secrets
+
+---
+kind: KubeadmConfig
+apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+metadata:
+  name: kubeadm-control-plane1-config
+  namespace: capmox-system
+spec:
+  initConfiguration:
+    nodeRegistration: {} # node registration parameters are automatically injected by CAPD according to the kindest/node image in use.
+---
+kind: Machine
+apiVersion: cluster.x-k8s.io/v1beta1
+metadata:
+  name: kubeadm-control-plane1
+  labels:
+    cluster.x-k8s.io/cluster-name: proxmox-cluster-1
+    cluster.x-k8s.io/control-plane: "true"
+    set: controlplane
+spec:
+  bootstrap:
+    configRef:
+      kind: KubeadmConfig
+      apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
+      name: proxmox-control-plane1-config
+  infrastructureRef:
+    kind: proxmox
+    apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+    name: my-control-plane1-docker
+  version: "v1.30.0"
+
