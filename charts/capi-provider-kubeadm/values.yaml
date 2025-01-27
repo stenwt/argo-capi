@@ -1,0 +1,67 @@
+bootstrapControllerManager:
+  manager:
+    args:
+    - --leader-elect
+    - --diagnostics-address=:8443
+    - --insecure-diagnostics=false
+    - --feature-gates=MachinePool=true,KubeadmBootstrapFormatIgnition=false
+    - --bootstrap-token-ttl=15m
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      privileged: false
+      runAsGroup: 65532
+      runAsUser: 65532
+    image:
+      repository: registry.k8s.io/cluster-api/kubeadm-bootstrap-controller
+      tag: v1.9.4
+    imagePullPolicy: IfNotPresent
+  podSecurityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  replicas: 1
+bootstrapManager:
+  serviceAccount:
+    annotations: {}
+bootstrapWebhookService:
+  ports:
+  - port: 443
+    targetPort: webhook-server
+  type: ClusterIP
+controlPlaneControllerManager:
+  manager:
+    args:
+    - --leader-elect
+    - --diagnostics-address=:8443
+    - --insecure-diagnostics=false
+    - --use-deprecated-infra-machine-naming=false
+    - --feature-gates=MachinePool=true,ClusterTopology=false,KubeadmBootstrapFormatIgnition=false
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      privileged: false
+      runAsGroup: 65532
+      runAsUser: 65532
+    image:
+      repository: registry.k8s.io/cluster-api/kubeadm-control-plane-controller
+      tag: v1.9.4
+    imagePullPolicy: IfNotPresent
+  podSecurityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  replicas: 1
+controlPlaneManager:
+  serviceAccount:
+    annotations: {}
+controlPlaneWebhookService:
+  ports:
+  - port: 443
+    targetPort: webhook-server
+  type: ClusterIP
+kubernetesClusterDomain: cluster.local

@@ -1,0 +1,45 @@
+controllerManager:
+  manager:
+    args:
+    - --leader-elect
+    - --feature-gates=ClusterTopology=false
+    - --metrics-bind-address=localhost:8080
+    - --v=0
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+    image:
+      repository: ghcr.io/ionos-cloud/cluster-api-provider-proxmox
+      tag: v0.6.2
+    resources:
+      limits:
+        cpu: 500m
+        memory: 128Mi
+      requests:
+        cpu: 10m
+        memory: 64Mi
+  podSecurityContext:
+    runAsNonRoot: true
+  replicas: 1
+  serviceAccount:
+    annotations: {}
+kubernetesClusterDomain: cluster.local
+managerCredentials:
+  secret: ""
+  token: ""
+  url: ""
+metricsService:
+  ports:
+  - name: https
+    port: 8443
+    protocol: TCP
+    targetPort: https
+  type: ClusterIP
+webhookService:
+  ports:
+  - port: 443
+    protocol: TCP
+    targetPort: 9443
+  type: ClusterIP
