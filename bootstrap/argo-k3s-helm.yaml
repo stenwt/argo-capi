@@ -11,9 +11,5 @@ spec:
   repo: https://argoproj.github.io/argo-helm
   valuesContent:
     configs:
-      repositories:
-        name: github-repo
-        type: git
-        url: https://github.com/stenwt/argo-capi 
       params:
         server.insecure: true
