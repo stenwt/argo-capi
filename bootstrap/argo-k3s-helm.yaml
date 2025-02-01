@@ -9,4 +9,11 @@ spec:
   version: 7.7.17
   chart: argo-cd
   repo: https://argoproj.github.io/argo-helm
-  #valuesContent: |-
+  valuesContent:
+    configs:
+      repositories:
+        name: github-repo
+        type: git
+        url: https://github.com/stenwt/argo-capi 
+      params:
+        server.insecure: true

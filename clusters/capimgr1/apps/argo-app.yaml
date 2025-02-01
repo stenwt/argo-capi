@@ -2,19 +2,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bitwarden-ssm
+  name: argocd
   namespace: 'argocd'
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: bitwarden-ssm
+    namespace: argocd
     server: https://kubernetes.default.svc
   source:
     path: ''
-    repoURL: https://charts.bitwarden.com/
-    targetRevision: '0.1.0-Beta'
-    chart: sm-operator
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: '7.7.17'
+    chart: argo-cd
+    helm:
+      valueFiles:
+      - ../values/argocd-values.yaml
   sources: []
   project: default
   syncPolicy:
@@ -24,3 +27,4 @@ spec:
     syncOptions:
       - ServerSideApply=true
       - CreateNamespace=true
+
