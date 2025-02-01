@@ -672,7 +672,7 @@ spec:
                       template:
                         description: |-
                           template defines the template to use for generating the name of the ControlPlane object.
-                          If not defined, it will fallback to `{{ .cluster.name }}-{{ .random }}`.
+                          If not defined, it will fallback to `.cluster.name-.random`.
                           If the templated string exceeds 63 characters, it will be trimmed to 58 characters and will
                           get concatenated with a random suffix of length 5.
                           The templating mechanism provides the following arguments:
@@ -1515,7 +1515,7 @@ spec:
                             template:
                               description: |-
                                 template defines the template to use for generating the name of the MachineDeployment object.
-                                If not defined, it will fallback to `{{ .cluster.name }}-{{ .machineDeployment.topologyName }}-{{ .random }}`.
+                                If not defined, it will fallback to `.cluster.name-.machineDeployment.topologyName-.random`.
                                 If the templated string exceeds 63 characters, it will be trimmed to 58 characters and will
                                 get concatenated with a random suffix of length 5.
                                 The templating mechanism provides the following arguments:
@@ -1824,7 +1824,7 @@ spec:
                             template:
                               description: |-
                                 template defines the template to use for generating the name of the MachinePool object.
-                                If not defined, it will fallback to `{{ .cluster.name }}-{{ .machinePool.topologyName }}-{{ .random }}`.
+                                If not defined, it will fallback to `.cluster.name-.machinePool.topologyName-.random`.
                                 If the templated string exceeds 63 characters, it will be trimmed to 58 characters and will
                                 get concatenated with a random suffix of length 5.
                                 The templating mechanism provides the following arguments:
