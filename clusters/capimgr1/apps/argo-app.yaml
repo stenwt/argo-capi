@@ -17,7 +17,7 @@ spec:
     chart: argo-cd
     helm:
       valueFiles:
-        - clusters/capimgr1/values/argocd-values.yaml
+        - https://raw.githubusercontent.com/stenwt/argo-capi/refs/heads/main/clusters/capimgr1/values/argocd-values.yaml
   sources: []
   project: default
   syncPolicy:
