@@ -23,5 +23,10 @@ spec:
     syncOptions:
       - ServerSideApply=true
       - CreateNamespace=true
-
-
+  ignoreDifferences:
+    - kind: ClusterRole
+      managedFieldsManagers:
+        - clusterrole-aggregation-controller
+      jsonPointers:
+        - /rules
+      group: "*"
