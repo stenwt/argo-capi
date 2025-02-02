@@ -17,6 +17,9 @@ spec:
   - path: clusters/capimgr1/apps
     repoURL: https://github.com/stenwt/argo-capi/
     targetRevision: main
+  - path: clusters/capimgr1/clusters
+    repoURL: https://github.com/stenwt/argo-capi/
+    targetRevision: main
   project: default
   syncPolicy:
     automated:
