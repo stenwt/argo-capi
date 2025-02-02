@@ -17,7 +17,7 @@ spec:
     chart: argo-cd
     helm:
       valueFiles:
-      - values/argocd-values.yaml
+        - clusters/capimgr1/values/argocd-values.yaml
   sources: []
   project: default
   syncPolicy:
