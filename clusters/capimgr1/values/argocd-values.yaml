@@ -1,3 +1,5 @@
 configs:
   params:
+    #https://argo-cd.readthedocs.io/en/stable/user-guide/diffing/#ignoring-rbac-changes-made-by-aggregateroles
+    resource.compareoptions.ignoreAggregatedRoles: true 
     server.insecure: true
