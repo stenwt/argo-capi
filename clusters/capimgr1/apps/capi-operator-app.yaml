@@ -16,7 +16,7 @@ spec:
     repoURL: https://kubernetes-sigs.github.io/cluster-api-operator 
     targetRevision: '0.16.0'
     chart: cluster-api-operator
-  - path: 'lusters/capimgr1/extra-manifests/capi-api-operator'
+  - path: 'clusters/capimgr1/extra-manifests/capi-api-operator'
     repoURL: https://github.com/stenwt/argo-capi
     targetRevision: main
   project: default
