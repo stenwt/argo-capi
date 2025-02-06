@@ -17,12 +17,17 @@ spec:
     chart: argo-cd
     helm:
       values: |
+        global:
+          domain: capimgr1
         configs:
           params:
             server.insecure: true
         server:
           ingress:
             enabled: true
+          tls:
+            - hosts:
+              - capimgr1
   sources: []
   project: default
   syncPolicy:
