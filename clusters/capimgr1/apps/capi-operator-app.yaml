@@ -11,12 +11,14 @@ spec:
   destination:
     namespace: cluster-api-operator
     server: https://kubernetes.default.svc
-  source:
-    path: ''
+  sources:
+  - path: ''
     repoURL: https://kubernetes-sigs.github.io/cluster-api-operator 
     targetRevision: '0.16.0'
     chart: cluster-api-operator
-  sources: []
+  - path: 'clusters/capimgr1/extra-manifests/cluster-api-operator'
+    repoURL: https://github.com/stenwt/argo-capi
+    targetRevision: main
   project: default
   syncPolicy:
     automated:
