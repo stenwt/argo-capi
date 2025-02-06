@@ -16,7 +16,7 @@ spec:
     targetRevision: '7.7.17'
     chart: argo-cd
     helm:
-      values
+      values: |
         configs:
           params:
             server.insecure: true
