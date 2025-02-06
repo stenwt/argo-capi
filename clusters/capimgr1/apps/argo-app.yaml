@@ -16,8 +16,10 @@ spec:
     targetRevision: '7.7.17'
     chart: argo-cd
     helm:
-      valueFiles:
-        - https://raw.githubusercontent.com/stenwt/argo-capi/refs/heads/main/clusters/capimgr1/values/argocd-values.yaml
+      values
+        configs:
+          params:
+            server.insecure: true
   sources: []
   project: default
   syncPolicy:

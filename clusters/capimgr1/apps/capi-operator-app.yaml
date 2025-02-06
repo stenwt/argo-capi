@@ -14,7 +14,7 @@ spec:
   source:
     path: ''
     repoURL: https://kubernetes-sigs.github.io/cluster-api-operator 
-    targetRevision: '0.14.0'
+    targetRevision: '0.16.0'
     chart: cluster-api-operator
   sources: []
   project: default
