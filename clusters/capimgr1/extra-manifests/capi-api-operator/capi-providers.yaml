@@ -24,3 +24,14 @@ metadata:
   namespace: capi-operator-system
 spec:
   version: v1.9.4
+
+---
+apiVersion: ipam.cluster.x-k8s.io/v1alpha2
+kind: InClusterIPPool
+metadata:
+  name: inclusterippool-sample
+spec:
+  addresses:
+    - 172.27.1.224
+  prefix: 27
+  gateway: 172.27.1.1
