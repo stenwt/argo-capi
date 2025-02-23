@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argocd-appset
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            argo: "argo-manager"
+    - git:
+      repoURL: https://github.com/stenwt/argo-capi.git
+      revision: main
+      files:
+      - path: 'clusters/{{.name}}/appset-configs/argocd'
+  template:
+    metadata:
+      name: '{{.app.name}}-{{.name}}'
+    spec:
+      destination:
+        namespace: '{{.app.namespace}}'
+        server: '{{.server}}'
+      sources:
+      - path: '{{.app.helm.path}}'
+        repoURL: '{{.app.helm.repo}}'
+        targetRevision: '{{.app.helm.version}}'
+        chart: '{{.app.helm.chart}}'
+      - path: 'clusters/{{.name}}/{{.app.name}}/values.yaml'
+        repoURL: '{{.app.config.repo}}'
+        targetRevision: '{{.app.config.tag}}'
+      - path: 'clusters/{{.name}}/{{.app.name}}/addon-manifests'
+        repoURL: '{{.app.config.repo}}'
+        targetRevision: '{{.app.config.tag}}'
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - ServerSideApply=true
+          - CreateNamespace=true

@@ -1,0 +1,11 @@
+app:
+  name: argocd
+  namespace: argocd
+  helm:
+    path: ''
+    version: '7.7.17'
+    chart: argo-cd
+    repo: https://argoproj.github.io/argo-helm
+  config:
+    repo: https://github.com/stenwt/argo-capi
+    tag: main
