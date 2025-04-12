@@ -34,12 +34,11 @@ metadata:
 spec:
   version: v1.0.1
 
-
 ---
 apiVersion: ipam.cluster.x-k8s.io/v1alpha2
-kind: InClusterIPPool
+kind: GlobalInClusterIPPool
 metadata:
-  name: inclusterippool-sample
+  name: inclusterippool
 spec:
   addresses:
     - 172.27.1.224
