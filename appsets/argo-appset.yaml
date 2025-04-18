@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: argocd-appset
+  namespace: argocd
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
@@ -11,10 +12,10 @@ spec:
           matchLabels:
             argo: "argo-manager"
     - git:
-      repoURL: https://github.com/stenwt/argo-capi.git
-      revision: main
-      files:
-      - path: 'clusters/{{.name}}/appset-configs/argocd'
+        repoURL: https://github.com/stenwt/argo-capi.git
+        revision: main
+        files:
+        - path: 'clusters/{{.name}}/appset-configs/argocd'
   template:
     metadata:
       name: '{{.app.name}}-{{.name}}'

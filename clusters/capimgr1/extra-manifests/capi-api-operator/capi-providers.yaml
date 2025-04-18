@@ -39,7 +39,6 @@ apiVersion: ipam.cluster.x-k8s.io/v1alpha2
 kind: GlobalInClusterIPPool
 metadata:
   name: inclusterippool
-  namespace: capi-operator-system
 spec:
   addresses:
     - 172.27.1.224
