@@ -1,0 +1,29 @@
+core: 
+  cluster-api:
+    namespace: capi-operator-system
+    version: v1.9.4
+bootstrap:
+  kubeadm: 
+    namespace: capi-operator-system
+    version: v1.9.4
+controlPlane:
+  kubeadm: 
+    namespace: capi-operator-system
+    version: v1.9.4
+ipam:
+  in-cluster:
+    namespace: capi-operator-system
+    verison: v1.9.4
+addon:
+  cluster-config:
+    namespace: capi-operator-system
+    additionalManifests:
+      - apiVersion: ipam.cluster.x-k8s.io/v1alpha2
+        kind: InClusterIPPool
+        metadata:
+          name: inclusterippool-sample
+        spec:
+          addresses:
+            - 172.27.1.224
+          prefix: 27
+          gateway: 172.27.1.1

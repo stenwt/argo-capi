@@ -9,12 +9,12 @@ metadata:
 spec:
   destination:
     server: https://kubernetes.default.svc
-  source: 
+  sources: 
   - path: appsets
     repoURL: https://github.com/stenwt/argo-capi/
     targetRevision: main
     directory:
-      include: "argo-appset.yaml"
+      include: 'appsets/*appset.yaml'
   project: default
   syncPolicy:
     automated:

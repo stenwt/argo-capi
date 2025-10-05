@@ -1,0 +1,4 @@
+app: argocd
+chartRepoURL: https://argoproj.github.io/argo-helm
+chartName: argo-cd
+chartVersion: '7.7.17'

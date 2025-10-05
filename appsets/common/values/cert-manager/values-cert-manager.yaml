@@ -1,0 +1,3 @@
+parameters:
+  - name: installCRDs
+    value: 'true'

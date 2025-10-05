@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: argocd-appset
+  name: capi-appset
   namespace: argocd
 spec:
   goTemplate: true
@@ -10,7 +10,7 @@ spec:
     - clusters:
         selector:
           matchLabels:
-            argo: "argo-manager"
+            capi: "capi-manager"
         values:
           env: '{{ index .metadata.labels "env" }}'
           cloud: '{{ index .metadata.labels "cloud" }}'
@@ -18,14 +18,14 @@ spec:
         repoURL: https://github.com/stenwt/argo-capi.git
         revision: main
         files:
-        - path: 'appsets/argo/**/argo-config.yaml'
+        - path: 'appsets/capi/**/argo-config.yaml'
   template:
     metadata:
       name: '{{.app.name}}-{{.name}}'
     spec:
       destination:
         namespace: '{{ if hasKey . "targetNamespace" }}{{ .targetNamespace }}{{ else }}{{ .app }}{{ end }}'
-        server: '{{.server}}'
+        name: '{{.name}}'
       sources:
         - repoURL: '{{.chartRepoURL}}'
           chart: '{{.chartName}}'
@@ -33,11 +33,11 @@ spec:
           helm:
             ignoreMissingValuesFiles: true
             valueFiles:
-            - $values/appsets/argo/values/{{.app}}/{{.app}}-values.yaml
-            - $values/appsets/argo/values/{{.app}}/{{.app}}-{{.charVersion}}-values.yaml
-            - $values/appsets/argo/values/{{.app}}/{{.app}}-{{.values.env}}-values.yaml
-            - $values/appsets/argo/values/{{.app}}/{{.app}}-{{.values.cloud}}-values.yaml
-            - $values/appsets/argo/values/{{.app}}/{{.app}}-{{.name}}-values.yaml
+            - $values/appsets/capi/values/{{.app}}/{{.app}}-values.yaml
+            - $values/appsets/capi/values/{{.app}}/{{.app}}-{{.charVersion}}-values.yaml
+            - $values/appsets/capi/values/{{.app}}/{{.app}}-{{.values.env}}-values.yaml
+            - $values/appsets/capi/values/{{.app}}/{{.app}}-{{.values.cloud}}-values.yaml
+            - $values/appsets/capi/values/{{.app}}/{{.app}}-{{.name}}-values.yaml
         - repoURL: https://github.com/stenwt/argo-capi.git
           revision: main
           ref: values

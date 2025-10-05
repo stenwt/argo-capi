@@ -8,9 +8,9 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
     - clusters:
-        selector:
-          matchLabels:
-            argo: "argo-manager"
+      # selector:
+      #   matchLabels:
+      #     argo: "argo-manager"
         values:
           env: '{{ index .metadata.labels "env" }}'
           cloud: '{{ index .metadata.labels "cloud" }}'
@@ -18,7 +18,7 @@ spec:
         repoURL: https://github.com/stenwt/argo-capi.git
         revision: main
         files:
-        - path: 'appsets/argo/**/argo-config.yaml'
+        - path: 'appsets/common/**/argo-config.yaml'
   template:
     metadata:
       name: '{{.app.name}}-{{.name}}'
@@ -33,11 +33,11 @@ spec:
           helm:
             ignoreMissingValuesFiles: true
             valueFiles:
-            - $values/appsets/argo/values/{{.app}}/{{.app}}-values.yaml
-            - $values/appsets/argo/values/{{.app}}/{{.app}}-{{.charVersion}}-values.yaml
-            - $values/appsets/argo/values/{{.app}}/{{.app}}-{{.values.env}}-values.yaml
-            - $values/appsets/argo/values/{{.app}}/{{.app}}-{{.values.cloud}}-values.yaml
-            - $values/appsets/argo/values/{{.app}}/{{.app}}-{{.name}}-values.yaml
+            - $values/appsets/common/values/{{.app}}/{{.app}}-values.yaml
+            - $values/appsets/common/values/{{.app}}/{{.app}}-{{.charVersion}}-values.yaml
+            - $values/appsets/common/values/{{.app}}/{{.app}}-{{.values.env}}-values.yaml
+            - $values/appsets/common/values/{{.app}}/{{.app}}-{{.values.cloud}}-values.yaml
+            - $values/appsets/common/values/{{.app}}/{{.app}}-{{.name}}-values.yaml
         - repoURL: https://github.com/stenwt/argo-capi.git
           revision: main
           ref: values
