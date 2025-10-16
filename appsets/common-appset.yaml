@@ -6,7 +6,7 @@ metadata:
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
-  generators
+  generators:
     - clusters:
       # selector:
       #   matchLabels:
