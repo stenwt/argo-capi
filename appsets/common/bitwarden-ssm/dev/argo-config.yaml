@@ -1,4 +1,4 @@
-app: bitwarden-ssm
-chartRepoURL: https://charts.bitwarden.com
-chartName: sm-operator
-chartVersion: '0.1.0-Beta'
+app: "bitwarden-ssm"
+chartRepoURL: "https://charts.bitwarden.com"
+chartName: "sm-operator"
+chartVersion: "0.1.0-Beta"

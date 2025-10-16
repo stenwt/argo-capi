@@ -1,4 +1,4 @@
-app: cluster-api-operator
-chartRepoURL: https://kubernetes-sigs.github.io/cluster-api-operator
-chartName: cluster-api-operator
-chartVersion: '0.16.0'
+app: "cluster-api-operator"
+chartRepoURL: "https://kubernetes-sigs.github.io/cluster-api-operator"
+chartName: "cluster-api-operator"
+chartVersion: "0.16.0"
