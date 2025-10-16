@@ -13,8 +13,7 @@ spec:
   - path: appsets
     repoURL: https://github.com/stenwt/argo-capi/
     targetRevision: main
-    directory:
-      include: 'appsets/*appset.yaml'
+    path: 'appsets/'
   project: default
   syncPolicy:
     automated:
