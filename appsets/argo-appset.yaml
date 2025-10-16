@@ -39,7 +39,7 @@ spec:
             - $values/appsets/argo/values/{{.app}}/{{.app}}-{{.values.cloud}}-values.yaml
             - $values/appsets/argo/values/{{.app}}/{{.app}}-{{.name}}-values.yaml
         - repoURL: https://github.com/stenwt/argo-capi.git
-          revision: main
+          targetRevision: main
           ref: values
       project: default
       syncPolicy:
