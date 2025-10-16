@@ -10,14 +10,14 @@ spec:
   - matrix:
       generators:
       - clusters:
-        values:
-          env: '{{ index .metadata.labels "env" }}'
-          cloud: '{{ index .metadata.labels "cloud" }}'
+          values:
+            env: '{{ index .metadata.labels "env" }}'
+            cloud: '{{ index .metadata.labels "cloud" }}'
       - git:
-        repoURL: https://github.com/stenwt/argo-capi.git
-        revision: main
-        files:
-        - path: 'appsets/common/**/argo-config.yaml'
+          repoURL: https://github.com/stenwt/argo-capi.git
+          revision: main
+          files:
+          - path: 'appsets/common/**/argo-config.yaml'
   template:
     metadata:
       name: '{{.app}}-{{.name}}'
