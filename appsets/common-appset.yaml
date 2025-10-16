@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: argocd-appset
+  name: common-appset
   namespace: argocd
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-    - clusters:
+  # - clusters:
       # selector:
       #   matchLabels:
       #     argo: "argo-manager"
-        values:
-          env: '{{ index .metadata.labels "env" }}'
-          cloud: '{{ index .metadata.labels "cloud" }}'
+      # values:
+      #   env: '{{ index .metadata.labels "env" }}'
+      #   cloud: '{{ index .metadata.labels "cloud" }}'
     - git:
         repoURL: https://github.com/stenwt/argo-capi.git
         revision: main
@@ -25,7 +25,7 @@ spec:
     spec:
       destination:
         namespace: '{{ if hasKey . "targetNamespace" }}{{ .targetNamespace }}{{ else }}{{ .app }}{{ end }}'
-        server: '{{.server}}'
+        name: '{{.name}}'
       sources:
         - repoURL: '{{.chartRepoURL}}'
           chart: '{{.chartName}}'
@@ -34,9 +34,9 @@ spec:
             ignoreMissingValueFiles: true
             valueFiles:
             - $values/appsets/common/values/{{.app}}/{{.app}}-values.yaml
-            - $values/appsets/common/values/{{.app}}/{{.app}}-{{.charVersion}}-values.yaml
-            - $values/appsets/common/values/{{.app}}/{{.app}}-{{.values.env}}-values.yaml
-            - $values/appsets/common/values/{{.app}}/{{.app}}-{{.values.cloud}}-values.yaml
+            - $values/appsets/common/values/{{.app}}/{{.app}}-{{.chartVersion}}-values.yaml
+#           - $values/appsets/common/values/{{.app}}/{{.app}}-{{.values.env}}-values.yaml
+#           - $values/appsets/common/values/{{.app}}/{{.app}}-{{.values.cloud}}-values.yaml
             - $values/appsets/common/values/{{.app}}/{{.app}}-{{.name}}-values.yaml
         - repoURL: https://github.com/stenwt/argo-capi.git
           targetRevision: main

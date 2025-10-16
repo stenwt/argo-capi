@@ -7,13 +7,13 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-    - clusters:
-        selector:
-          matchLabels:
-            capi: "capi-manager"
-        values:
-          env: '{{ index .metadata.labels "env" }}'
-          cloud: '{{ index .metadata.labels "cloud" }}'
+#   - clusters:
+#       selector:
+#         matchLabels:
+#           capi: "capi-manager"
+#       values:
+#         env: '{{ index .metadata.labels "env" }}'
+#         cloud: '{{ index .metadata.labels "cloud" }}'
     - git:
         repoURL: https://github.com/stenwt/argo-capi.git
         revision: main
@@ -34,9 +34,9 @@ spec:
             ignoreMissingValueFiles: true
             valueFiles:
             - $values/appsets/capi/values/{{.app}}/{{.app}}-values.yaml
-            - $values/appsets/capi/values/{{.app}}/{{.app}}-{{.charVersion}}-values.yaml
-            - $values/appsets/capi/values/{{.app}}/{{.app}}-{{.values.env}}-values.yaml
-            - $values/appsets/capi/values/{{.app}}/{{.app}}-{{.values.cloud}}-values.yaml
+            - $values/appsets/capi/values/{{.app}}/{{.app}}-{{.chartVersion}}-values.yaml
+#           - $values/appsets/capi/values/{{.app}}/{{.app}}-{{.values.env}}-values.yaml
+#           - $values/appsets/capi/values/{{.app}}/{{.app}}-{{.values.cloud}}-values.yaml
             - $values/appsets/capi/values/{{.app}}/{{.app}}-{{.name}}-values.yaml
         - repoURL: https://github.com/stenwt/argo-capi.git
           targetRevision: main
