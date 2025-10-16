@@ -21,7 +21,7 @@ spec:
         - path: 'appsets/capi/**/argo-config.yaml'
   template:
     metadata:
-      name: '{{.app.name}}-{{.name}}'
+      name: '{{.app}}-{{.name}}'
     spec:
       destination:
         namespace: '{{ if hasKey . "targetNamespace" }}{{ .targetNamespace }}{{ else }}{{ .app }}{{ end }}'
