@@ -1,0 +1,4 @@
+app: "external-secrets"
+chartRepoURL: "https://charts.external-secrets.io"
+chartName: "external-secrets"
+chartVersion: "0.20.3"

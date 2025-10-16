@@ -8,9 +8,6 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
     - clusters:
-#       selector:
-#         matchLabels:
-#           argo: "argo-manager"
         values:
           env: '{{ index .metadata.labels "env" }}'
           cloud: '{{ index .metadata.labels "cloud" }}'
