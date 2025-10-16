@@ -21,11 +21,11 @@ spec:
         - path: 'appsets/capi/**/argo-config.yaml'
   template:
     metadata:
-      name: '{{.app}}-{{.name}}'
+      name: '{{ .app }}-{{ .name }}'
     spec:
       destination:
         namespace: '{{ if hasKey . "targetNamespace" }}{{ .targetNamespace }}{{ else }}{{ .app }}{{ end }}'
-        name: '{{.name}}'
+        name: '{{ .name }}'
       sources:
         - repoURL: '{{.chartRepoURL}}'
           chart: '{{.chartName}}'
