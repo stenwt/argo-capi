@@ -31,7 +31,7 @@ spec:
           chart: '{{.chartName}}'
           targetRevision: '{{.chartVersion}}'
           helm:
-            ignoreMissingValuesFiles: true
+            ignoreMissingValueFiles: true
             valueFiles:
             - $values/appsets/common/values/{{.app}}/{{.app}}-values.yaml
             - $values/appsets/common/values/{{.app}}/{{.app}}-{{.charVersion}}-values.yaml
