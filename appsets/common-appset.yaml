@@ -8,7 +8,7 @@ spec:
   goTemplateOptions: ["missingkey=error"]
   generators:
   - matrix:
-    generators:
+      generators:
       - clusters:
         values:
           env: '{{ index .metadata.labels "env" }}'
