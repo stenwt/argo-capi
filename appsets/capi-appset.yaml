@@ -7,18 +7,20 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-    - clusters:
-        selector:
-          matchLabels:
-            capi: "capi-manager"
-        values:
-          env: '{{ index .metadata.labels "env" }}'
-          cloud: '{{ index .metadata.labels "cloud" }}'
-    - git:
-        repoURL: https://github.com/stenwt/argo-capi.git
-        revision: main
-        files:
-        - path: 'appsets/capi/**/argo-config.yaml'
+  - matrix:
+      generators:
+      - clusters:
+          selector:
+            matchLabels:
+              capi: "capi-manager"
+          values:
+            env: '{{ index .metadata.labels "env" }}'
+            cloud: '{{ index .metadata.labels "cloud" }}'
+      - git:
+          repoURL: https://github.com/stenwt/argo-capi.git
+          revision: main
+          files:
+          - path: 'appsets/capi/**/argo-config.yaml'
   template:
     metadata:
       name: '{{ .app }}-{{ .name }}'
