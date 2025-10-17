@@ -1,19 +1,19 @@
 core: 
   cluster-api:
     namespace: capi-operator-system
-    version: v1.9.4
+    version: v1.11.2
 bootstrap:
   kubeadm: 
     namespace: capi-operator-system
-    version: v1.9.4
+    version: v1.11.2
 controlPlane:
   kubeadm: 
     namespace: capi-operator-system
-    version: v1.9.4
+    version: v1.11.2
 ipam:
   in-cluster:
     namespace: capi-operator-system
-    verison: v1.9.4
+    verison: v0.1.0
 infrastructure:
   proxmox:
     namespace: capi-operator-system
