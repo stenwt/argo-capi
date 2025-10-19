@@ -1,5 +1,0 @@
-app: "capmox-cluster-class"
-chartRepoURL: "https://github.com/stenwt/argo-capi/charts/capmox-cluster-class"
-chartName: "capmox-cluster-class"
-chartVersion: "0.1.0"
-targetNamespace: "capi-operator-system"
