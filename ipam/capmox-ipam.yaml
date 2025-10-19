@@ -1,0 +1,9 @@
+kind: GlobalInClusterIPPool
+metadata:
+  name: inclusterippool
+  namespace: capi-operator-system
+spec:
+  addresses:
+    - 172.27.1.224
+  prefix: 27
+  gateway: 172.27.1.1
