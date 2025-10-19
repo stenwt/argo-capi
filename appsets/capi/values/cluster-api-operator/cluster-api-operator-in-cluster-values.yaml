@@ -18,6 +18,14 @@ ipam:
     namespace: capi-operator-system
     createNamespace: false
     verison: v0.1.0
+manager:
+  featureGates:
+    proxmox:
+      ClusterTopology: true
+    core: 
+      ClusterTopology: true
+    kubeadm:
+      ClusterTopology: true
 infrastructure:
   proxmox:
     namespace: capi-operator-system
