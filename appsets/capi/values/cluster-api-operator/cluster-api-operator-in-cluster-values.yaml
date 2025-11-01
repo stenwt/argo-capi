@@ -1,3 +1,4 @@
+insecureDiagnostics: false
 core: 
   cluster-api:
     namespace: capi-operator-system
