@@ -8,6 +8,8 @@ bootstrap:
     createNamespace: false
 controlPlane:
   kubeadm:
+    namespace: "capi-operator-system"
+    createNamespace: false
 ipam:
   in-cluster:
     namespace: "capi-operator-system"
