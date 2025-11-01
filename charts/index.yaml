@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  cluster-class:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2025-10-23T21:02:17.309567194-05:00"
+    description: A Helm chart for Kubernetes containing cluster class templates
+    digest: 8bc37b09699c94268040b40071851303f7ce09f6d714a36e587452e44a0c7387
+    name: cluster-class
+    type: application
+    urls:
+    - cluster-class-0.1.0.tgz
+    version: 0.1.0
+generated: "2025-10-23T21:02:17.308658031-05:00"

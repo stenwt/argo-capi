@@ -43,9 +43,6 @@ spec:
         - repoURL: https://github.com/stenwt/argo-capi.git
           targetRevision: main
           ref: values
-#       - repoURL: https://github.com/stenwt/argo-capi.git
-#         targetRevision: main
-#         path: 'appsets/capi/manifests'
       project: default
       syncPolicy:
         automated:
