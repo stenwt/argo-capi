@@ -1,5 +1,5 @@
 apiVersion: v2
-name: cluster-class-wrapper
+name: cluster-api-operator-wrapper
 description: A Helm chart to wrap custom configs with cluster-api-operator
 version: 0.1.0
 dependencies: 
