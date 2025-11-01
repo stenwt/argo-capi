@@ -1,5 +1,5 @@
 app: "cluster-api-operator"
-chartRepoURL: "https://github.com/stenwt/argo-capi/charts/cluster-api-operator"
-chartName: "cluster-api-operator-wrapper"
+chartRepoURL: "https://github.com/stenwt/argo-capi/"
+chartName: "charts/cluster-api-operator-wrapper"
 chartVersion: "HEAD"
 targetNamespace: "capi-operator-system"

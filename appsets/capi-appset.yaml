@@ -30,7 +30,7 @@ spec:
         name: '{{ .name }}'
       sources:
         - repoURL: '{{.chartRepoURL}}'
-          chart: '{{.chartName}}'
+          path: '{{.chartName}}'
           targetRevision: '{{.chartVersion}}'
           helm:
             ignoreMissingValueFiles: true
