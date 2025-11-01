@@ -24,8 +24,8 @@ infrastructure:
     namespace: capi-operator-system
     createNamespace: false
     version: v0.7.4
-manager.featureGates:
-  manager:
+manager:
+  featureGates: 
     proxmox:
       ClusterTopology: "true"
     core: 
