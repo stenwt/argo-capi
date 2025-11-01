@@ -1,8 +1,21 @@
-core: "cluster-api"
-bootstrap: "kubeadm"
-controlPlane: "kubeadm"
-ipam: "in-cluster"
-infrastructure: "proxmox"
+core:
+  cluster-api:
+    namespace: "capi-operator-system"
+    createNamespace: false
+bootstrap:
+  kubeadm:
+    namespace: "capi-operator-system"
+    createNamespace: false
+controlPlane:
+  kubeadm:
+ipam:
+  in-cluster:
+    namespace: "capi-operator-system"
+    createNamespace: false
+infrastructure:
+  proxmox:
+    namespace: "capi-operator-system"
+    createNamespace: false
 manager:
   featureGates: 
     proxmox:
