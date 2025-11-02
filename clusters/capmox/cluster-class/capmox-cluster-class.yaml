@@ -70,7 +70,6 @@ spec:
               description: Name of the Secret containing Proxmox credentials
           required:
             - name
-            - namespace
     - name: controlPlaneEndpoint
       required: true
       schema:

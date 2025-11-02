@@ -17,6 +17,9 @@ spec:
         name: proxmox-worker-pool
         replicas: 3
     variables:
+    - name: credentialsRef
+      value:
+        name: proxmox-creds
     - name: allowedNodes
       value:
       - pve1
