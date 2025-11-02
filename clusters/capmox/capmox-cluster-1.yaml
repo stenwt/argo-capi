@@ -9,6 +9,8 @@ spec:
   topology:
     class: proxmox-clusterclass-v0.1.0
     version: 1.29.6
+    credentialsRef:
+      name: capmox-credentials-pve-1
     controlPlane:
       replicas: 3
     workers:

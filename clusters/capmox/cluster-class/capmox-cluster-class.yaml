@@ -59,6 +59,18 @@ spec:
         namingStrategy:
            template: "{{ .cluster.name }}-loadbalancer-{{ .random }}"
   variables:
+    - name: credentialsRef
+      required: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Name of the Secret containing Proxmox credentials
+          required:
+            - name
+            - namespace
     - name: controlPlaneEndpoint
       required: true
       schema:
@@ -914,6 +926,8 @@ metadata:
 spec:
   template:
     spec:
+      credentialsRef:
+        name: proxmox-credentials
       controlPlaneEndpoint:
         host: 10.10.10.9
         port: 6443
