@@ -1,28 +1,29 @@
-core:
-  cluster-api:
-    namespace: "capi-operator-system"
-    createNamespace: false
-bootstrap:
-  kubeadm:
-    namespace: "capi-operator-system"
-    createNamespace: false
-controlPlane:
-  kubeadm:
-    namespace: "capi-operator-system"
-    createNamespace: false
-ipam:
-  in-cluster:
-    namespace: "capi-operator-system"
-    createNamespace: false
-infrastructure:
-  proxmox:
-    namespace: "capi-operator-system"
-    createNamespace: false
-manager:
-  featureGates: 
-    proxmox:
-      ClusterTopology: "true"
-    core: 
-      ClusterTopology: "true"
+cluster-api-operator:
+  core:
+    cluster-api:
+      namespace: "capi-operator-system"
+      createNamespace: false
+  bootstrap:
     kubeadm:
-      ClusterTopology: "true"
+      namespace: "capi-operator-system"
+      createNamespace: false
+  controlPlane:
+    kubeadm:
+      namespace: "capi-operator-system"
+      createNamespace: false
+  ipam:
+    in-cluster:
+      namespace: "capi-operator-system"
+      createNamespace: false
+  infrastructure:
+    proxmox:
+      namespace: "capi-operator-system"
+      createNamespace: false
+  manager:
+    featureGates:
+      proxmox:
+        ClusterTopology: "true"
+      core:
+        ClusterTopology: "true"
+      kubeadm:
+        ClusterTopology: "true"
