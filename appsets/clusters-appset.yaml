@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cluster-classes
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - matrix:
+      generators:
+      - clusters:
+          selector:
+            matchLabels:
+              capi: "capi-manager"
+          values:
+            env: '{{ index .metadata.labels "env" }}'
+      - git:
+          repoURL: https://github.com/stenwt/argo-capi.git
+          revision: main
+          directories:
+          - path: 'clusters/*'
+          - path: 'clusters/capimgr1'
+            exclude: true
+  template:
+    metadata:
+      name: '{{ .path.basename }}-cluster'
+    spec:
+      destination:
+        namespace: '{{ .path.basename }}'
+        name: '{{ .name }}'
+      sources:
+        - repoURL: https://github.com/stenwt/argo-capi.git
+          path: 'clusters/{{ .path.basename }}/cluster-class'
+          targetRevision: 'main'
+        - repoURL: https://github.com/stenwt/argo-capi.git
+          path: 'clusters/{{ .path.basename }}/'
+          targetRevision: 'main'
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - ServerSideApply=true
+          - CreateNamespace=true
