@@ -1,3 +1,18 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: proxmox-creds
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: bitwarden-secretsmanager
+    kind: ClusterSecretStore
+  dataFrom:
+  - find:
+      conversionStrategy: Default
+      decodingStrategy: None
+      name:
+        regexp: PROXMOX_
 ---
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
