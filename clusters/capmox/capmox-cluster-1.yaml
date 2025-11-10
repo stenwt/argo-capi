@@ -7,6 +7,9 @@ spec:
   secretStoreRef:
     name: bitwarden-secretsmanager
     kind: ClusterSecretStore
+  target:
+    name: proxmox-creds
+    creationPolicy: Owner
   dataFrom:
   - find:
       conversionStrategy: Default
