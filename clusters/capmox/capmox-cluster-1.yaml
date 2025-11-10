@@ -13,13 +13,13 @@ spec:
   data:
   - secretKey: PROXMOX_URL
     remoteRef:
-      key: PROXMOX_URL
+      key: "PROXMOX_URL"
   - secretKey: PROXMOX_SECRET
     remoteRef:
-      key: PROXMOX_SECRET
+      key: "PROXMOX_SECRET"
   - secretKey: PROXMOX_TOKEN
     remoteRef:
-      key: PROXMOX_TOKEN
+      key: "PROXMOX_TOKEN"
 ---
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
