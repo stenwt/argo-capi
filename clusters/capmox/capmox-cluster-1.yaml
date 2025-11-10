@@ -10,12 +10,16 @@ spec:
   target:
     name: proxmox-creds
     creationPolicy: Owner
-  dataFrom:
-  - find:
-      conversionStrategy: Default
-      decodingStrategy: None
-      name:
-        regexp: PROXMOX_
+  data:
+  - secretKey: PROXMOX_URL
+    remoteRef:
+      key: PROXMOX_URL
+  - secretKey: PROXMOX_SECRET
+    remoteRef:
+      key: PROXMOX_SECRET
+  - secretKey: PROXMOX_TOKEN
+    remoteRef:
+      key: PROXMOX_TOKEN
 ---
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
