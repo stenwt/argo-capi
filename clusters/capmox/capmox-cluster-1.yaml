@@ -5,7 +5,7 @@ metadata:
 spec:
   refreshInterval: 1h
   secretStoreRef:
-    name: bitwarden-secretsmanager-campmox
+    name: bitwarden-secretsmanager-capmox
     kind: ClusterSecretStore
   target:
     name: proxmox-creds
