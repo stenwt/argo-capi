@@ -1,14 +1,14 @@
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
-  name: proxmox-creds
+  name: proxmox-credentials
 spec:
   refreshInterval: 1h
   secretStoreRef:
     name: bitwarden-secretsmanager-capmox
     kind: ClusterSecretStore
   target:
-    name: proxmox-creds
+    name: proxmox-credentials
     creationPolicy: Owner
   data:
   - secretKey: PROXMOX_URL
@@ -41,7 +41,7 @@ spec:
     variables:
     - name: credentialsRef
       value:
-        name: proxmox-creds
+        name: proxmox-credentials
     - name: allowedNodes
       value:
       - pve1
