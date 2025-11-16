@@ -57,9 +57,9 @@ spec:
     - name: credentialsRef
       value:
         name: proxmox-credentials
-#    - name: allowedNodes
-#      value:
-#      - pve1
+    - name: allowedNodes
+      value:
+      - pve1
     - name: controlPlaneEndpoint
       value:
         host: 172.27.1.3
