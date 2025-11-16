@@ -17,19 +17,19 @@ spec:
         token-id: "{{ .PROXMOX_TOKEN | trim }}"
         token-secret: "{{ .PROXMOX_SECRET | trim }}"
   data:
-  - secretKey: url
+  - secretKey: PROXMOX_URL
     remoteRef:
       key: "url"
       conversionStrategy: Default
       decodingStrategy: None
       metadataPolicy: None
-  - secretKey: token-id
+  - secretKey: PROXMOX_TOKEN
     remoteRef:
       key: "token-id"
       conversionStrategy: Default
       decodingStrategy: None
       metadataPolicy: None
-  - secretKey: token-secret
+  - secretKey: PROXMOX_SECRET
     remoteRef:
       key: "token-secret"
       conversionStrategy: Default
