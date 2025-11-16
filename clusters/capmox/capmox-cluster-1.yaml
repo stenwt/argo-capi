@@ -10,22 +10,28 @@ spec:
   target:
     name: proxmox-credentials
     creationPolicy: Owner
+    template:
+      engineVersion: v2
+      data:
+        url: "{{ .PROXMOX_URL | trim }}"
+        token-id: "{{ .PROXMOX_TOKEN | trim }}"
+        token-secret: "{{ .PROXMOX_SECRET | trim }}"
   data:
   - secretKey: url
     remoteRef:
-      key: "PROXMOX_URL"
+      key: "url"
       conversionStrategy: Default
       decodingStrategy: None
       metadataPolicy: None
   - secretKey: token-id
     remoteRef:
-      key: "PROXMOX_TOKEN"
+      key: "token-id"
       conversionStrategy: Default
       decodingStrategy: None
       metadataPolicy: None
   - secretKey: token-secret
     remoteRef:
-      key: "PROXMOX_SECRET"
+      key: "token-secret"
       conversionStrategy: Default
       decodingStrategy: None
       metadataPolicy: None
