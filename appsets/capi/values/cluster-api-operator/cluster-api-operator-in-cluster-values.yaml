@@ -26,4 +26,5 @@ cluster-api-operator:
       core:
         ClusterTopology: "true"
       kubeadm:
+        EXP_CLUSTER_RESOURCE_SET: true
         ClusterTopology: "true"
