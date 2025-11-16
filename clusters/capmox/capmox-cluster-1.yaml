@@ -13,23 +13,23 @@ spec:
     template:
       engineVersion: v2
       data:
-        url: "{{ .url | trim }}"
-        token-id: "{{ .token-id | trim }}"
-        token-secret: "{{ .token-secret | trim }}"
+        url: "{{ .PROXMOX_URL| trim }}"
+        token-id: "{{ .PROXMOX_TOKEN | trim }}"
+        token-secret: "{{ .PROXMOX_SECRET| trim }}"
   data:
-  - secretKey: url
+  - secretKey: PROXMOX_URL
     remoteRef:
       key: "PROXMOX_URL"
       conversionStrategy: Default
       decodingStrategy: None
       metadataPolicy: None
-  - secretKey: token-id
+  - secretKey: PROXMOX_TOKEN
     remoteRef:
       key: "PROXMOX_TOKEN"
       conversionStrategy: Default
       decodingStrategy: None
       metadataPolicy: None
-  - secretKey: token-secret
+  - secretKey: PROXMOX_SECRET
     remoteRef:
       key: "PROXMOX_SECRET"
       conversionStrategy: Default
