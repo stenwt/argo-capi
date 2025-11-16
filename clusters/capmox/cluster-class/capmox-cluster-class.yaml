@@ -1000,4 +1000,4 @@ spec:
           taints:
           - effect: NoSchedule
             key: node-role.kubernetes.io/load-balancer
-            value: ""
+            value: ''

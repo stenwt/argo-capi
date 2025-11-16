@@ -14,23 +14,32 @@ spec:
   - secretKey: PROXMOX_URL
     remoteRef:
       key: "PROXMOX_URL"
+      conversionStrategy: Default
+      decodingStrategy: None
+      metadataPolicy: None
   - secretKey: PROXMOX_SECRET
     remoteRef:
       key: "PROXMOX_SECRET"
+      conversionStrategy: Default
+      decodingStrategy: None
+      metadataPolicy: None
   - secretKey: PROXMOX_TOKEN
     remoteRef:
       key: "PROXMOX_TOKEN"
+      conversionStrategy: Default
+      decodingStrategy: None
+      metadataPolicy: None
 ---
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
   labels:
-    cluster.x-k8s.io/proxmox-cluster-cni:
+    cluster.x-k8s.io/proxmox-cluster-cni: null
   name: capmox-cluster-1
 spec:
   topology:
     class: proxmox-clusterclass-v0.1.0
-    version: 1.29.6
+    version: v1.29.6
     controlPlane:
       replicas: 3
     workers:
