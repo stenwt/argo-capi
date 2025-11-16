@@ -60,7 +60,6 @@ spec:
     - name: allowedNodes
       value:
       - pve1
-      - pve2
     - name: controlPlaneEndpoint
       value:
         host: 172.27.1.3
