@@ -13,9 +13,9 @@ spec:
     template:
       engineVersion: v2
       data:
-        url: "{{ .PROXMOX_URL | trim }}"
-        token-id: "{{ .PROXMOX_TOKEN | trim }}"
-        token-secret: "{{ .PROXMOX_SECRET | trim }}"
+        url: "{{ .url | trim }}"
+        token-id: "{{ .token-id | trim }}"
+        token-secret: "{{ .token-secret | trim }}"
   data:
   - secretKey: url
     remoteRef:
