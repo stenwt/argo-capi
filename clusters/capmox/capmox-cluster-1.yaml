@@ -57,9 +57,9 @@ spec:
     - name: credentialsRef
       value:
         name: proxmox-credentials
-    - name: allowedNodes
-      value:
-      - pve1
+#    - name: allowedNodes
+#      value:
+#      - pve1
     - name: controlPlaneEndpoint
       value:
         host: 172.27.1.3
@@ -79,7 +79,7 @@ spec:
               default:
                 bridge: vmbr0
             numSockets: 1
-            numCores: 4
+            numCores: 2
             memoryMiB: 4096
             sourceNode: pve1
             templateID: 102
@@ -88,7 +88,7 @@ spec:
               default:
                 bridge: vmbr0
             numSockets: 1
-            numCores: 4
+            numCores: 2
             memoryMiB: 4096
             sourceNode: pve1
             templateID: 102
