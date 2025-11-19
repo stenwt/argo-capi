@@ -45,7 +45,7 @@ metadata:
 spec:
   topology:
     class: proxmox-clusterclass-v0.1.0
-    version: v1.29.6
+    version: v1.32.4
     controlPlane:
       replicas: 3
     workers:
