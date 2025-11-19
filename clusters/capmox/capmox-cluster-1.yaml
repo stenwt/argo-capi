@@ -59,7 +59,7 @@ spec:
         name: proxmox-credentials
     - name: allowedNodes
       value:
-      - pve1
+      - pve2
     - name: controlPlaneEndpoint
       value:
         host: 172.27.1.3
@@ -80,9 +80,9 @@ spec:
                 bridge: vmbr0
             numSockets: 1
             numCores: 2
-            memoryMiB: 4096
-            sourceNode: pve1
-            templateID: 108
+            memoryMiB: 3192
+            sourceNode: pve2
+            templateID: 102
           workerNode:
             network:
               default:
@@ -90,7 +90,7 @@ spec:
             numSockets: 1
             numCores: 2
             memoryMiB: 4096
-            sourceNode: pve1
-            templateID: 108
+            sourceNode: pve2
+            templateID: 102
         sshAuthorizedKeys:
         - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEGYxNQegFzQwsFoHirpBYVx2CMSCky0MI9n/H6XbdaU capi@capmox
