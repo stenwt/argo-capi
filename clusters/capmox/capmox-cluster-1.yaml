@@ -82,7 +82,7 @@ spec:
             numCores: 2
             memoryMiB: 4096
             sourceNode: pve1
-            templateID: 102
+            templateID: 108
           workerNode:
             network:
               default:
@@ -91,6 +91,6 @@ spec:
             numCores: 2
             memoryMiB: 4096
             sourceNode: pve1
-            templateID: 102
+            templateID: 108
         sshAuthorizedKeys:
         - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEGYxNQegFzQwsFoHirpBYVx2CMSCky0MI9n/H6XbdaU capi@capmox
