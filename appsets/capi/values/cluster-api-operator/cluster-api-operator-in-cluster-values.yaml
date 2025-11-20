@@ -19,9 +19,15 @@ cluster-api-operator:
     proxmox:
       namespace: "capi-operator-system"
       createNamespace: false
+    oci:
+      namespace: "capi-operator-system"
+      createNamespace: false
+      version: v0.21.0
   manager:
     featureGates:
       proxmox:
+        ClusterTopology: "true"
+      oci:
         ClusterTopology: "true"
       core:
         ClusterTopology: "true"
