@@ -154,6 +154,14 @@ spec:
             mode:
               type: string
               enum: ["ipvs","iptables"]
+    - name: skipKubeProxy
+      metadata: {}
+      required: false
+      schema:
+        openAPIV3Schema:
+          type: boolean
+          default: false
+          description: "add an option to disable kube-proxy by adding the relevant annotation to KubeadmControlPlane"
     - name: cloneSpec
       metadata: {}
       required: true
@@ -547,6 +555,21 @@ spec:
           - op: add
             path: /spec/template/spec/kubeadmConfigSpec/preKubeadmCommands/-
             value: /tmp/kube-proxy.sh
+  - name: SkipKubeProxy
+    description: "annotate the KubeadmControlPlane to skip kube-proxy setup"
+    enabledIf: "{{ if .skipKubeProxy  }}true{{ end }}"
+    definitions:
+      - selector:
+          apiVersion: controlplane.cluster.x-k8s.io/v1beta1
+          kind: KubeadmControlPlaneTemplate
+          matchResources:
+            controlPlane: true
+        jsonPatches:
+          - op: add
+            path: /spec/templates/metadata/annotations
+            valueFrom:
+              template: |
+                controlplane.cluster.x-k8s.io/skip-kube-proxy: "true"
   - name: WorkerNodeSetup
     description: "Configure Worker Node Initialisation"
     definitions:
