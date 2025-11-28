@@ -566,10 +566,15 @@ spec:
             controlPlane: true
         jsonPatches:
           - op: add
-            path: /spec/templates/metadata/annotations
+            path: /spec/template/metadata/annotations
             valueFrom:
               template: |
                 controlplane.cluster.x-k8s.io/skip-kube-proxy: "true"
+          - op: add
+            path: /spec/template/spec/kubeadmConfigSpec/initConfiguration/skipPhases
+            valueFrom:
+              template: |
+                - addon/kube-proxy
   - name: WorkerNodeSetup
     description: "Configure Worker Node Initialisation"
     definitions:
