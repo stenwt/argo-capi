@@ -3,6 +3,15 @@ apiVersion: cluster.x-k8s.io/v1beta1
 kind: ClusterClass
 metadata:
   name: proxmox-clusterclass-v0.1.0
+  annotations:
+    argocd.argoproj.io/diff-ignore-additional-fields: |
+      jsonPointers:
+      - /spec/controlplane/machineInfrastructure/ref/namespace
+      - /spec/workers/machineDeployments/template/bootstrap/ref/namespace
+      - /spec/workers/machineDeployments/template/infrastructure/ref/namespace
+      - /spec/controlplane/ref/namespace
+      - /spec/infrastructure/ref/namespace
+      - /spec/patches/definitions/selector/matchResources/controlPlane
 spec:
   controlPlane:
     namingStrategy:
@@ -374,6 +383,7 @@ spec:
           apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
           kind: ProxmoxClusterTemplate
           matchResources:
+            controlPlane: false
             infrastructureCluster: true
         jsonPatches:
           - op: add
@@ -408,6 +418,7 @@ spec:
           apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
           kind: ProxmoxClusterTemplate
           matchResources:
+            controlPlane: false
             infrastructureCluster: true
         jsonPatches:
           - op: add
