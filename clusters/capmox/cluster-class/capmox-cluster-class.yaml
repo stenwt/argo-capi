@@ -60,6 +60,7 @@ spec:
            template: "{{ .cluster.name }}-loadbalancer-{{ .random }}"
   variables:
     - name: credentialsRef
+      metadata: {}
       required: true
       schema:
         openAPIV3Schema:
@@ -71,6 +72,7 @@ spec:
           required:
             - name
     - name: controlPlaneEndpoint
+      metadata: {}
       required: true
       schema:
         openAPIV3Schema:
@@ -83,6 +85,7 @@ spec:
               type: integer
               default: 6443
     - name: ipv4Config
+      metadata: {}
       required: false
       schema:
         openAPIV3Schema:
@@ -102,6 +105,7 @@ spec:
               type: string
               default: "10.10.10.1"
     - name: ipv6Config
+      metadata: {}
       required: false
       schema:
         openAPIV3Schema:
@@ -121,6 +125,7 @@ spec:
               type: string
               default: "2001:db8::0001"
     - name: dnsServers
+      metadata: {}
       required: true
       schema:
         openAPIV3Schema:
@@ -131,6 +136,7 @@ spec:
           default: [8.8.8.8, 8.8.4.4]
           example: [8.8.8.8, 8.8.4.4]
     - name: allowedNodes
+      metadata: {}
       required: false
       schema:
         openAPIV3Schema:
@@ -139,6 +145,7 @@ spec:
             type: string
           example: ["pve1", "pve2", "pve3"]
     - name: kubeProxy
+      metadata: {}
       required: false
       schema:
         openAPIV3Schema:
@@ -148,6 +155,7 @@ spec:
               type: string
               enum: ["ipvs","iptables"]
     - name: cloneSpec
+      metadata: {}
       required: true
       schema:
         openAPIV3Schema:
@@ -1000,4 +1008,3 @@ spec:
           taints:
           - effect: NoSchedule
             key: node-role.kubernetes.io/load-balancer
-            value: ''
