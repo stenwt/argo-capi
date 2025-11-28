@@ -566,7 +566,7 @@ spec:
             controlPlane: true
         jsonPatches:
           - op: add
-            path: /spec/template/metadata/annotations/controlplane.cluster.x-k8s.io~1/skip-kube-proxy
+            path: /spec/template/metadata/annotations/controlplane.cluster.x-k8s.io~1skip-kube-proxy
             value: "true"
           - op: add
             path: /spec/template/spec/kubeadmConfigSpec/initConfiguration/skipPhases
