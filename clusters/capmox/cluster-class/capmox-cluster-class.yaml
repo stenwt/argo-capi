@@ -187,20 +187,23 @@ spec:
                   required:
                   - sourceNode
                   properties:
-                    bootVolume:
+                    disks:
                       type: object
                       properties:
-                        disk:
-                          type: string
-                          description: "Disk identifier (e.g. scsi0)"
-                        sizeGb:
-                          type: integer
-                          minimum: 5
-                          format: int32
-                          description: "Disk size in GB"
-                      required:
-                      - disk
-                      - sizeGb
+                        bootVolume:
+                          type: object
+                          properties:
+                            disk:
+                              type: string
+                              description: "Disk identifier (e.g. scsi0)"
+                            sizeGb:
+                              type: integer
+                              minimum: 5
+                              format: int32
+                              description: "Disk size in GB"
+                          required:
+                          - disk
+                          - sizeGb
                     format:
                       type: string
                       enum: [raw, qcow2, vmdk]
