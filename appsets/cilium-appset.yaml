@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: cilium-appset
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - matrix:
+      generators:
+      - clusters:
+          selector:
+            matchLabels:
+              cilium: "cilium-cluster"
+          values:
+            env: '{{ index .metadata.labels "env" }}'
+            cloud: '{{ index .metadata.labels "cloud" }}'
+      - git:
+          repoURL: https://github.com/stenwt/argo-capi.git
+          revision: main
+          files:
+          - path: 'appsets/cilium/**/argo-config.yaml'
+  template:
+    metadata:
+      name: 'cilium-{{.name}}'
+    spec:
+      destination:
+        namespace: kube-system
+        name: '{{.name}}'
+      sources:
+        - repoURL: '{{.chartRepoURL}}'
+          chart: '{{.chartName}}'
+          targetRevision: '{{.chartVersion}}'
+          helm:
+            ignoreMissingValueFiles: true
+            valueFiles:
+            - $values/appsets/cilium/values/cilium/cilium-values.yaml
+            - $values/appsets/cilium/values/cilium/cilium-{{.chartVersion}}-values.yaml
+            - $values/appsets/cilium/values/cilium/cilium-{{.values.env}}-values.yaml
+            - $values/appsets/cilium/values/cilium/cilium-{{.values.cloud}}-values.yaml
+            - $values/appsets/cilium/values/cilium/cilium-{{.name}}-values.yaml
+        - repoURL: https://github.com/stenwt/argo-capi.git
+          targetRevision: main
+          ref: values
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - ServerSideApply=true
+          - CreateNamespace=true

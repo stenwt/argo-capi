@@ -1,0 +1,4 @@
+app: "cilium-cni"
+chartRepoURL: "https://helm.cilium.io"
+chartName: "cilium"
+chartVersion: "1.18.4"
