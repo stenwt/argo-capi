@@ -69,7 +69,7 @@ spec:
     - name: ipv4Config
       value:
         addresses: [172.27.1.225-172.27.1.254]
-        gateway: 172.72.1.1
+        gateway: 172.27.1.1
         prefix: 24
     - name: cloneSpec
       value:
