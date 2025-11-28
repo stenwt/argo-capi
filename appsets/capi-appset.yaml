@@ -3,6 +3,15 @@ kind: ApplicationSet
 metadata:
   name: capi-appset
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/diff-ignore-additional-fields: |
+      jsonPointers:
+      - /spec/controlPlane/ref/namespace
+      - /spec/controlPlane/machineInfrastructure/ref/namespace
+      - /spec/workers/machineDeployments/template/bootstrap/ref/namespace
+      - /spec/workers/machineDeployments/template/infrastructure/ref/namespace
+      - /spec/infrastructure/ref/namespace
+      - /spec/patches/definitions/selector/matchResources/controlPlane
 spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
