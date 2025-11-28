@@ -190,15 +190,14 @@ spec:
                     disks:
                       type: object
                       properties:
-                        bootVolume:
-                          type: object
-                          properties:
-                            disk:
-                              type: string
+                        disk:
+                          type: string
+                          description: "Disk identifier (e.g. scsi0)"
                         sizeGb:
                           type: integer
                           minimum: 5
                           format: int32
+                          description: "Disk size in GB"
                       required:
                       - disk
                       - sizeGb
@@ -866,6 +865,54 @@ spec:
             path: /spec/template/spec/network
             valueFrom:
               variable: cloneSpec.machineSpec.workerNode.network
+  - name: ControlPlaneDiskConfig
+    description: "Configure ControlPlane Disk"
+    enabledIf: "{{ if .cloneSpec.machineSpec.controlPlane.disks }}true{{ end }}"
+    definitions:
+      - selector:
+          apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+          kind: ProxmoxMachineTemplate
+          matchResources:
+            controlPlane: true
+        jsonPatches:
+          - op: add
+            path: /spec/template/spec/disks
+            valueFrom:
+              variable: cloneSpec.machineSpec.controlPlane.disks
+  - name: WorkerNodeDiskConfig
+    description: "Configure WorkerNode Disk"
+    enabledIf: "{{ if .cloneSpec.machineSpec.workerNode.disks }}true{{ end }}"
+    definitions:
+      - selector:
+          apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+          kind: ProxmoxMachineTemplate
+          matchResources:
+            controlPlane: false
+            machineDeploymentClass:
+              names:
+              - proxmox-worker
+        jsonPatches:
+          - op: add
+            path: /spec/template/spec/disks
+            valueFrom:
+              variable: cloneSpec.machineSpec.workerNode.disks
+  - name: LoadBalancerDiskConfig
+    description: "Configure LoadBalancer Disk"
+    enabledIf: "{{ if .cloneSpec.machineSpec.loadBalancer.disks }}true{{ end }}"
+    definitions:
+      - selector:
+          apiVersion: infrastructure.cluster.x-k8s.io/v1alpha1
+          kind: ProxmoxMachineTemplate
+          matchResources:
+            controlPlane: false
+            machineDeploymentClass:
+              names:
+              - proxmox-loadbalancer
+        jsonPatches:
+          - op: add
+            path: /spec/template/spec/disks
+            valueFrom:
+              variable: cloneSpec.machineSpec.loadBalancer.disks
   - name: LoadBalancerDefaultNetwork
     description: "Configure LoadBalancer Network Adapters"
     enabledIf: "{{ if .cloneSpec.machineSpec.loadBalancer.network }}true{{ end }}"

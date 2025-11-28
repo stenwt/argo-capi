@@ -92,6 +92,9 @@ spec:
             numSockets: 1
             numCores: 2
             memoryMiB: 4096
+            disks:
+              disk: scsi0
+              sizeGb: 75
             sourceNode: pve2
             templateID: 102
         sshAuthorizedKeys:
