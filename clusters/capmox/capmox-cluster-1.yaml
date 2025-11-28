@@ -41,6 +41,7 @@ kind: Cluster
 metadata:
   labels:
     cluster.x-k8s.io/proxmox-cluster-cni: ''
+    controlplane.cluster.x-k8s.io/skip-kube-proxy: "true"
   name: capmox-cluster-1
 spec:
   topology:
