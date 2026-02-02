@@ -37,5 +37,11 @@ k3s kubectl rollout status -w --namespace argocd deployment
 echo "Applying app-of-apps"
 k3s kubectl apply -f https://raw.githubusercontent.com/stenwt/argo-capi/refs/heads/main/clusters/capimgr1/capimgr1-app.yaml
 
+echo "Cleaning up Argo helmchart"
+k3s kubectl annotate -n kube-system helmchart/argocd-in-cluster helmcharts.helm.cattle.io/unmanaged=true
+k3s kubectl patch -n kube-system helmchart/argocd-in-cluster --type merge -p '{"spec":{"failurePolicy":"abort"}}'
+k3s kubectl delete -n kube-system helmchart/argocd-in-cluster --force
+
+
 echo "Ready! To join more nodes to this cluster, run: "
 echo "curl -sfL https://get.k3s.io | K3S_TOKEN=$(cat $TOKENFILE) sh -s - server --server https://$(hostname):6443 --tls-san=$(hostname)"

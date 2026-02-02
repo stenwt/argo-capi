@@ -1,0 +1,65 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: global-appset
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+  - clusters:
+      selector:
+        matchExpression:
+          key: argocd.argoproj.io/cluster-tags
+          operator: Exists
+  - git:
+      repoURL: https://github.com/stenwt/argo-capi.git
+      revision: main
+      files:
+      - path: 'appsets/**/argo-config.yaml'
+  template:
+    metadata:
+      name: '{{.app}}-{{.name}}'
+      annotations:
+        skip-generation: >-
+          {{- $tags := split "," (index .cluster.metadata.labels "argocd.argoproj.io/cluster-tags") -}}
+          {{- $isCommon := contains $tags "common" -}}
+          {{- $hasAppTag := contains $tags .appKey -}}
+          {{- $isCommonApp := contains (list "common-nginx" "common-prometheus") .appKey -}}
+          {{- if or (and $isCommon $isCommonApp) $hasAppTag -}}
+          false
+          {{- else -}}
+          true
+          {{- end }}
+    spec:
+      destination:
+        namespace: '{{ if hasKey . "targetNamespace" }}{{ .targetNamespace }}{{ else }}{{ .app }}{{ end }}'
+        name: '{{.name}}'
+      sources:
+        - repoURL: '{{.chartRepoURL}}'
+          chart: '{{.chartName}}'
+          targetRevision: '{{.chartVersion}}'
+          helm:
+            ignoreMissingValueFiles: true
+            valueFiles:
+            - $values/appsets/common/values/{{.app}}/{{.app}}-values.yaml
+            - $values/appsets/common/values/{{.app}}/{{.app}}-{{.chartVersion}}-values.yaml
+            - $values/appsets/common/values/{{.app}}/{{.app}}-{{.values.env}}-values.yaml
+            - $values/appsets/common/values/{{.app}}/{{.app}}-{{.values.cloud}}-values.yaml
+            - $values/appsets/common/values/{{.app}}/{{.app}}-{{.name}}-values.yaml
+        - repoURL: https://github.com/stenwt/argo-capi.git
+          targetRevision: main
+          ref: values
+      project: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - ServerSideApply=true
+          - CreateNamespace=true
+      ignoreDifferences:
+        - group: argoproj.io
+          kind: Application
+          jsonPointers:
+            - /metadata/annotations/skip‑generation

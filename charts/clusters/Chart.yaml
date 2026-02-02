@@ -1,0 +1,4 @@
+apiVersion: v2
+name: clusters
+description: A Helm chart to wrap cluster class and cluster definitions
+version: 0.1.0

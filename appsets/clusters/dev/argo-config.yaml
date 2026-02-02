@@ -1,0 +1,4 @@
+app: "clusters"
+chartRepoURL:  https://github.com/stenwt/argo-capi.git
+chartName: "charts/clusters"
+chartVersion: "0.1.0"

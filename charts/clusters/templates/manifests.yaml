@@ -1,0 +1,17 @@
+{{- $baseDir := "manifests" -}}
+
+{{/* ---------- *.yaml files ---------- */}}
+{{- $yamlFiles := .Files.Glob (printf "%s/**/*.yaml" $baseDir) -}}
+{{- range $path, $bytes := $yamlFiles }}
+# Source: {{ $path }}
+{{ $bytes | toString | nindent 0 }}
+---
+{{- end }}
+
+{{/* ---------- *.yml files (alternate extension) ---------- */}}
+{{- $ymlFiles := .Files.Glob (printf "%s/**/*.yml" $baseDir) -}}
+{{- range $path, $bytes := $ymlFiles }}
+# Source: {{ $path }}
+{{ $bytes | toString | nindent 0 }}
+---
+{{- end }}
