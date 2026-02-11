@@ -7,26 +7,28 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - clusters:
-      selector:
-        matchExpression:
-          key: argocd.argoproj.io/cluster-tags
-          operator: Exists
-  - git:
-      repoURL: https://github.com/stenwt/argo-capi.git
-      revision: main
-      files:
-      - path: 'appsets/**/argo-config.yaml'
+    - matrix:
+        generators:
+          - clusters:
+              values:
+                env: '{{ index .metadata.labels "env" }}'
+                cloud: '{{ index .metadata.labels "cloud" }}'
+          - git:
+              repoURL: https://github.com/stenwt/argo-capi.git
+              revision: main
+              files:
+                - path: 'appsets/**/argo-config.yaml'
   template:
     metadata:
       name: '{{.app}}-{{.name}}'
       annotations:
+        # --------------------------------------------------------------
+        # NEW skip‑generation logic – uses boolean labels per app
+        # --------------------------------------------------------------
         skip-generation: >-
-          {{- $tags := split "," (index .cluster.metadata.labels "argocd.argoproj.io/cluster-tags") -}}
-          {{- $isCommon := contains $tags "common" -}}
-          {{- $hasAppTag := contains $tags .appKey -}}
-          {{- $isCommonApp := contains (list "common-nginx" "common-prometheus") .appKey -}}
-          {{- if or (and $isCommon $isCommonApp) $hasAppTag -}}
+          {{- $labelKey := printf "%s-enabled" .app -}}
+          {{- $enabled := index .metadata.labels $labelKey | default "false" -}}
+          {{- if eq $enabled "true" -}}
           false
           {{- else -}}
           true
@@ -42,11 +44,11 @@ spec:
           helm:
             ignoreMissingValueFiles: true
             valueFiles:
-            - $values/appsets/common/values/{{.app}}/{{.app}}-values.yaml
-            - $values/appsets/common/values/{{.app}}/{{.app}}-{{.chartVersion}}-values.yaml
-            - $values/appsets/common/values/{{.app}}/{{.app}}-{{.values.env}}-values.yaml
-            - $values/appsets/common/values/{{.app}}/{{.app}}-{{.values.cloud}}-values.yaml
-            - $values/appsets/common/values/{{.app}}/{{.app}}-{{.name}}-values.yaml
+              - $values/appsets/values/{{.app}}/{{.app}}-values.yaml
+              - $values/appsets/values/{{.app}}/{{.app}}-{{.chartVersion}}-values.yaml
+              - $values/appsets/values/{{.app}}/{{.app}}-{{.values.env}}-values.yaml
+              - $values/appsets/values/{{.app}}/{{.app}}-{{.values.cloud}}-values.yaml
+              - $values/appsets/values/{{.app}}/{{.app}}-{{.name}}-values.yaml
         - repoURL: https://github.com/stenwt/argo-capi.git
           targetRevision: main
           ref: values
